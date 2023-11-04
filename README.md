@@ -10,7 +10,7 @@ Example of correct order:
 
 7 8 9
 
-https://tong1233.github.io/Slider-Puzzle/
+Game Link: https://tong1233.github.io/Slider-Puzzle/
 
 Details:
 
