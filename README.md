@@ -4,9 +4,9 @@ Classic Slider Puzzle. Solve the puzzle by sliding the empty square (click the s
 
 Example of correct order:
 
-1 2 3
-4 5 6
-7 8 9
+#1 2 3
+#4 5 6
+#7 8 9
 
 https://tong1233.github.io/Slider-Puzzle/
 
