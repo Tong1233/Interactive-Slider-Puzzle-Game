@@ -1,0 +1,52 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    /*margin-left: 100px; /* Adjust the margin to shift the header right */
+    font-family: "Arial", sans-serif; /* Use a specific font name or font-family here */
+    /* Additional styling for your h1 if needed */
+}
+
+.puzzle-size {
+    margin-bottom: 20px; /* Add spacing between the form and the puzzle */
+}
+
+label[for="size"] {
+    font-family: "Arial", sans-serif; /* Use your desired font here */
+    /* Additional label styles, if needed */
+}
+
+#puzzle-container {
+    display: grid;
+    gap: 3px; /* Set the margin between puzzle boxes */
+    max-width: 80%; /* Adjust this value as needed */
+    width: 100%; /* Ensures the container fills the available space */
+    overflow-x: auto; /* Add horizontal scroll if needed */
+    justify-content: center; /* Center the row horizontally */
+    align-items: center; /* Center the row vertically */
+}
+
+#puzzle-container::after {
+    content: ''; /* Add content to the pseudo-element */
+    height: 20px; /* Adjust the buffer height as needed */
+    background-color: transparent; /* Set the background to transparent */
+}
+
+.puzzle-piece {
+    width: 100px; /* Adjust the width of each box */
+    height: 100px; /* Adjust the height of each box */
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    font-family: "Arial", sans-serif; /* Use your desired font here */
+}
