@@ -10,7 +10,7 @@ Example of correct order:
 
 https://tong1233.github.io/Slider-Puzzle/
 
-###Details:
+Details:
 
 Interactive slider puzzle developed using HTML, JavaScript and CSS.
 Implements slider puzzle logic for moving pieces and shuffling so that it is always solvable. 
