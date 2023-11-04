@@ -50,13 +50,16 @@ function createPuzzle() {
             if (i === size - 1 && j === size - 1) {
                 // The last cell represents the empty space
                 piece.textContent = '';
+                piece.style.border = '2px solid blue'; // Add a blue border
+                piece.style.backgroundColor = 'transparent'; // Set background to transparent
+                piece.style.width  = '96px';
+                piece.style.height = '96px';
+
             } else {
                 piece.textContent = i * size + j + 1;
+                piece.style.width = '100px';
+                piece.style.height = '100px';
             }
-
-            piece.style.width = '100px';
-            piece.style.height = '100px';
-
             //piece.addEventListener('click', () => movePiece(i, j));
             pieces[i][j] = piece;
 
@@ -95,20 +98,47 @@ function addbuttonlisteners(){
 }
 
 function shufflePieces() {
-    const totalPieces = size * size-1;
+     const totalPieces = size * size - 1;
 
-        for (let i = totalPieces - 1; i > 0; i--) {
-            // Generate a random index between 0 and i (inclusive)
+        // Create an array to represent the puzzle pieces
+        const piecesArray = new Array(totalPieces);
+
+        // Initialize the piecesArray with values from 1 to totalPieces
+        for (let i = 0; i < totalPieces; i++) {
+            piecesArray[i] = i + 1;
+        }
+
+        // Shuffle the piecesArray
+        for (let i = piecesArray.length - 1; i > 0; i--) {
             const randomIndex = Math.floor(Math.random() * (i + 1));
+            [piecesArray[i], piecesArray[randomIndex]] = [piecesArray[randomIndex], piecesArray[i]];
+        }
 
-            // Calculate positions for the current piece and the randomly selected piece
-            const currentI = Math.floor(i / size);
-            const currentJ = i % size;
-            const randomI = Math.floor(randomIndex / size);
-            const randomJ = randomIndex % size;
+        // Calculate the number of inversions in the shuffled puzzle
+        let inversions = 0;
+        for (let i = 0; i < piecesArray.length - 1; i++) {
+            for (let j = i + 1; j < piecesArray.length; j++) {
+                if (piecesArray[i] > piecesArray[j]) {
+                    inversions++;
+                }
+            }
+        }
 
-            // Swap the positions of the current piece and the randomly selected piece in the 2D array
-            swapPieces(currentI, currentJ, randomI, randomJ);
+        // If the number of inversions is odd, swap the last two pieces
+        if (inversions % 2 !== 0) {
+            [piecesArray[piecesArray.length - 2], piecesArray[piecesArray.length - 1]] = [
+                piecesArray[piecesArray.length - 1],
+                piecesArray[piecesArray.length - 2]
+            ];
+        }
+
+        // Assign the shuffled values to the puzzle pieces
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (i * size + j < totalPieces) {
+                    pieces[i][j].textContent = piecesArray[i * size + j];
+                }
+            }
         }
 
         // Update the positions on the screen
@@ -146,6 +176,17 @@ function movePiece(i, j) {
             updatePiecePositions();
         }
 
+           const outputElement2 = document.getElementById('status');
+
+           if(isPuzzleSolved())
+           {
+               outputElement2.textContent = "Congratulations! You Solved the Puzzle!";
+           }
+           else
+           {
+            outputElement2.textContent = "Puzzle is not Solved";
+           }
+           outputElement2.style.fontFamily = "Arial, sans-serif";
 
 }
 
@@ -193,6 +234,29 @@ function updatePiecePositions() {
                 puzzleContainer.appendChild(piece); // Add the piece back to the container
             }
         }
+
+}
+
+function isPuzzleSolved() {
+    const totalPieces = size * size;
+        let expectedValue = 1;
+
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (pieces[i][j].textContent !== '') {
+                    const currentValue = parseInt(pieces[i][j].textContent);
+                    if (currentValue !== expectedValue) {
+                        // If any piece's value doesn't match the expected order, the puzzle is not solved
+                        return false;
+                    }
+                    expectedValue++;
+                } else if (i === size - 1 && j === size - 1) {
+                    // If we reached the last piece (empty space) and it's at the expected position
+                    return true;
+                }
+            }
+        }
+        return true; // If we reached here, the puzzle is solved
 }
 
 createPuzzle();
