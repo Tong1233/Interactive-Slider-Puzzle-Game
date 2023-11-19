@@ -1,6 +1,6 @@
 # Slider Puzzle
 
-Game Link: https://tong1233.github.io/Slider-Puzzle/
+Game Link: https://tong1233.github.io/Interactive-Slider-Puzzle-Game/
 
 Classic Slider Puzzle. Solve the puzzle by sliding the empty square (click the squares next to the empty square) and get all the pieces in the right order.
 
